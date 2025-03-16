@@ -1,0 +1,15 @@
+services:
+  application_db:
+    image: postgres:17.4-alpine
+    container_name: application_db
+    environment:
+      POSTGRES_DB: escape_hub
+      POSTGRES_USER: application_user
+      POSTGRES_PASSWORD: application_password
+    ports:
+        - "5432:5432"
+    volumes:
+        - application_db:/var/lib/postgresql/data
+
+volumes:
+    application_db:
