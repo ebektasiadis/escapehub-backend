@@ -1,6 +1,5 @@
-using Microsoft.EntityFrameworkCore;
-
 using Domain.User;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Abstractions.Storage;
 
