@@ -1,10 +1,8 @@
 using Domain.User;
-using Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-
-namespace Infrastructure.Users;
+namespace Infrastructure.Database.Configurations;
 
 public class UserDbConfiguration : IEntityTypeConfiguration<User>
 {
@@ -17,8 +15,11 @@ public class UserDbConfiguration : IEntityTypeConfiguration<User>
         builder.HasIndex(user => user.IdentityProviderId)
             .IsUnique();
 
+        builder.HasIndex(user => user.Email)
+            .IsUnique();
+
         builder.Property(user => user.Id)
-            .HasConversion(userId => userId.Value.ToGuid(), userId => new UserId(Ulid.Parse(userId.ToByteArray())))
+            .HasConversion(userId => userId.Value.ToString(), userId => new UserId(Ulid.Parse(userId)))
             .HasMaxLength(Ulid.MaxValue.ToString().Length);
     }
 }
